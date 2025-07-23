@@ -4,14 +4,14 @@
 
 <h1> List movie </h1>
 <table>
-    <tr> <th> title</th> <th>Description</th><th>Year</th></tr>
+    <tr> <th>title<th> Description </th><th> Year </th></tr>
 {% for movie in movies %}
     <tr>
         <td><h1> {{movie.title |upper}}</h1></td>
-
     <td><h4> {{movie.year}}</h4></td>
-<td><p> {{movie.description | default:'no data available'}}</p></td>
+<td><p> {{movie.description}}</p></td>
     </tr>
 {% endfor %}
 </table>
 {% endblock content %}
+
