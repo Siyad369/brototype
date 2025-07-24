@@ -1,11 +1,13 @@
 {% extends 'blank_layout.html' %}
 
 {% block content %}
-<h1> Create </h1><br><br>
+<a href="{% url 'list' %}" class="btn btn-link">← Back to Movie List</a>
+<h1> Create/edit movie </h1><br><br>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ frm.as_p }}
-    <button  type="submit">Create </button><br><br>
+    <button  type="submit">Submit </button><br><br>
 
 </form>
+
 {% endblock content %}
