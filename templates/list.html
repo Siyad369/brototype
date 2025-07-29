@@ -19,6 +19,7 @@
           <th>Description</th>
           <th style="width: 130px;">Actions</th>
           <th> Images</th>
+          <th> Censor details</th>
 
         </tr>
       </thead>
@@ -40,6 +41,7 @@
 {% else %}
     <td><em>No poster</em></td>
 {% endif %}
+          <td> {{ movie.censor_details }} </td>
         </tr>
         {% empty %}
         <tr>
