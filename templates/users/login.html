@@ -1,0 +1,18 @@
+
+<!--<li> <a href="{% url 'signup' %}">Sign-up</a> </li>-->
+<a href="{% url 'list' %}" class="btn btn-link">← Back to Movie List</a>
+<h1> login </h1><br><br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p><label> Username : </label><input type="text" name="username"/></p>
+    <p><label> Password : </label><input type="password" name="password"/></p>
+    <button  type="submit">Signup </button><br><br>
+
+</form>
+
+<p style="background_color:red;">
+    {% if error_message %}
+    {{ error_message}}
+    {% endif %}
+</p>
+

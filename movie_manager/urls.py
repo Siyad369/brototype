@@ -23,6 +23,7 @@ from movie_manager import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('movies.urls')),
+    path('', include('users.urls'))
 
 
 ]

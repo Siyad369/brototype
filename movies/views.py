@@ -3,6 +3,7 @@ from . models import MovieInfo
 # Create your views here.
 from .forms import MovieForm, CensorForm
 from . models import MovieInfo
+from django.contrib.auth.decorators import login_required
 
 
 def create(request):
@@ -27,9 +28,19 @@ def create(request):
     # return render(request, 'create.html', {'frm': frm})
 
 
+@login_required(login_url='login')
 def list(request):
+    recent_visits = request.session.get('recent_visits', [])
+    count = request.session.get('count', 0)
+    # print(request.COOKIES)
+    count = int(count)
+    count = count+1
+    request.session['count'] = count
+    recent_movie_set = MovieInfo.objects.filter(pk__in=recent_visits)
     movie_data = MovieInfo.objects.all()
-    return render(request, 'list.html', {'movies': movie_data})
+    response = render(request, 'list.html', {'movies': movie_data, 'visits': count,
+                                             'recent_movies': recent_movie_set},)
+    return response
 
 
 def edit(request, pk):
@@ -39,9 +50,14 @@ def edit(request, pk):
         if frm.is_valid():
             frm.save()
             return redirect('list')
+    else:
+        recent_visits = request.session.get('recent_visits', [])
+        recent_visits.insert(0,pk)
+        request.session['recent_visits'] = recent_visits
     return render(request, 'create.html', {'frm': frm})
 
 
+@login_required(login_url='login')
 def delete(request, pk):
     instance = MovieInfo.objects.get(pk=pk)
     instance.delete()
