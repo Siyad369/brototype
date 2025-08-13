@@ -1,0 +1,23 @@
+{% extends 'blank_layout.html' %}
+{% block content %}
+<!--<li> <a href="{% url 'signup' %}">Sign-up</a> </li>-->
+<a href="{% url 'list' %}" class="btn btn-link">← Back to Movie List</a>
+<h1> Create/edit movie </h1><br><br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p><label> Username : </label><input type="text" name="username"/></p>
+    <p><label> Password : </label><input type="password" name="password"/></p>
+    <button  type="submit">Signup </button><br><br>
+
+</form>
+<p>
+    {% if user %}
+     new user created with username {{ user.username }}
+    {% endif %}
+</p>
+<p style="background_color:red;">
+    {% if error_message %}
+    New user created with username {{ error_message}}
+    {% endif %}
+</p>
+{% endblock content %}

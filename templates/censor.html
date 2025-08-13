@@ -1,0 +1,8 @@
+<h1> censor page</h1>
+<a href="{% url 'list' %}" class="btn btn-link">← Back to Movie List</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type = "submit"> Submit</button>
+
+</form>
